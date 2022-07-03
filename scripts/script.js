@@ -6,52 +6,60 @@ function computerPlay() {
 function playerPlay() {
     let move = prompt('Choose your weapon - rock, paper or scissors');
     
-    // fix null move - cancelling
+    if (move == null) {
+        return null;
+    }
 
-    // if (move == null) {
-    //     return;
-    // }
     while (move != 'rock' && move != 'paper' && move != 'scissors') {
         alert('Wrong weapon! Try again');
-        move = prompt('Choose your weapon - rock, paper or scissors').toLowerCase();
+        move = prompt('Choose your weapon - rock, paper or scissors');
+        if (move != null) move = move.toLowerCase();
+        else return null;
     }
     return move;
 }
 
 function playRound(playerSelection, computerSelection) {
     let winner, description;
-    if (playerSelection == 'rock') {
-        if (computerSelection == 'paper') {
-            winner = 'computer';
-            description = 'Paper beats rock! Point for the computer 😔';
-        } else if (computerSelection == 'scissors') {
-            winner = 'player';
-            description = 'Rock beats scissors! Point for you! 😎';
-        } else { // rock vs rock
-            winner = 'none';
-            description = 'Rock equals rock';
-        }
-    } else if (playerSelection == 'paper') {
-        if (computerSelection == 'scissors') {
-            winner = 'computer';
-            description = 'Scissors beat paper! Point for the computer 😔'
-        } else if (computerSelection == 'rock') {
-            winner = 'player';
-            description = 'Paper beats rock! Point for you! 😎';
-        } else { // paper vs paper
-            winner = 'none';
-            description = 'Paper equals paper';
-        }
-    } else { // scissors
-        if (computerSelection == 'rock') {
-            winner = 'computer';
-            description = 'Rock beats scissors! Point for the computer 😔';
-        } else if (computerSelection == 'paper') {
-            winner = 'player';
-            description = 'Scissors beat paper! Point for you! 😎';
-        } else { // scissors vs scissors
-            winner = 'none';
-            description = 'Scissors equal scissors';
+
+    if (playerSelection == null) {
+        winner = 'aborted';
+        description = 'Game aborted, you lose!';
+    } else {
+        
+        if (playerSelection == 'rock') {
+            if (computerSelection == 'paper') {
+                winner = 'computer';
+                description = 'Paper beats rock! Point for the computer 😔';
+            } else if (computerSelection == 'scissors') {
+                winner = 'player';
+                description = 'Rock beats scissors! Point for you! 😎';
+            } else { // rock vs rock
+                winner = 'none';
+                description = 'Rock equals rock';
+            }
+        } else if (playerSelection == 'paper') {
+            if (computerSelection == 'scissors') {
+                winner = 'computer';
+                description = 'Scissors beat paper! Point for the computer 😔'
+            } else if (computerSelection == 'rock') {
+                winner = 'player';
+                description = 'Paper beats rock! Point for you! 😎';
+            } else { // paper vs paper
+                winner = 'none';
+                description = 'Paper equals paper';
+            }
+        } else { // scissors
+            if (computerSelection == 'rock') {
+                winner = 'computer';
+                description = 'Rock beats scissors! Point for the computer 😔';
+            } else if (computerSelection == 'paper') {
+                winner = 'player';
+                description = 'Scissors beat paper! Point for you! 😎';
+            } else { // scissors vs scissors
+                winner = 'none';
+                description = 'Scissors equal scissors';
+            }
         }
     }
 
@@ -67,6 +75,8 @@ function game() {
         let winner = playRound(playerSelection, computerSelection);
         if (winner == 'player') playerScore++;
         else if (winner == 'computer') computerScore++;
+        else if (winner == 'aborted') return;
+        
         console.log(`Current score: Player -> %c${playerScore} - ${computerScore} %c<- Computer 
         `, "font-weight: bold; color: red;", "");
     }
