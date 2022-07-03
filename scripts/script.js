@@ -75,7 +75,9 @@ function game() {
         let winner = playRound(playerSelection, computerSelection);
         if (winner == 'player') playerScore++;
         else if (winner == 'computer') computerScore++;
-        else if (winner == 'aborted') return;
+        else if (winner == 'aborted') {
+            return;
+        }
         
         console.log(`Current score: Player -> %c${playerScore} - ${computerScore} %c<- Computer 
         `, "font-weight: bold; color: red;", "");
@@ -86,5 +88,12 @@ function game() {
     else console.log ("It's draw. Could have been worse 🤷")
 }
 
-game();
+let playAgain = 'y';
+
+while (playAgain == 'y') {
+    game();
+    playAgain = prompt('Do you want to play again? [y/n]');
+}
+
+console.log("Thank you for playing rock, paper and scissors!")
 
