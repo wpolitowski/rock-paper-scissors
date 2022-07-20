@@ -100,6 +100,7 @@ let playAgain = 'y';
 
 
 
+
 const btnRock = document.createElement('button');
 const btnPaper = document.createElement('button');
 const btnScissors = document.createElement('button');
@@ -119,10 +120,7 @@ const buttons = document.querySelectorAll(".button")
 buttons.forEach(button => button.addEventListener("click", playerPlay));
 
 function playerPlay() {
-    console.log(this)
+    let playerMove = this.classList[1]; 
+    playRound(playerMove, computerPlay());
 }
-
-
-
-
 
