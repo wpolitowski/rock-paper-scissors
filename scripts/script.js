@@ -3,21 +3,23 @@ function computerPlay() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
-function playerPlay() {
-    let move = prompt('Choose your weapon - rock, paper or scissors');
+// function playerPlay() {
+//     let move = prompt('Choose your weapon - rock, paper or scissors');
     
-    if (move == null) {
-        return null;
-    }
+//     if (move == null) {
+//         return null;
+//     }
 
-    while (move != 'rock' && move != 'paper' && move != 'scissors') {
-        alert('Wrong weapon! Try again');
-        move = prompt('Choose your weapon - rock, paper or scissors');
-        if (move != null) move = move.toLowerCase();
-        else return null;
-    }
-    return move;
-}
+//     while (move != 'rock' && move != 'paper' && move != 'scissors') {
+//         alert('Wrong weapon! Try again');
+//         move = prompt('Choose your weapon - rock, paper or scissors');
+//         if (move != null) move = move.toLowerCase();
+//         else return null;
+//     }
+//     return move;
+// }
+
+
 
 function playRound(playerSelection, computerSelection) {
     let winner, description;
@@ -42,6 +44,7 @@ function playRound(playerSelection, computerSelection) {
             if (computerSelection == 'scissors') {
                 winner = 'computer';
                 description = 'Scissors beat paper! Point for the computer 😔'
+            
             } else if (computerSelection == 'rock') {
                 winner = 'player';
                 description = 'Paper beats rock! Point for you! 😎';
@@ -69,7 +72,7 @@ function playRound(playerSelection, computerSelection) {
 
 function game() {
     let playerScore = 0, computerScore = 0;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 1; i++) {
         const playerSelection = playerPlay();
         const computerSelection = computerPlay();
         let winner = playRound(playerSelection, computerSelection);
@@ -90,10 +93,36 @@ function game() {
 
 let playAgain = 'y';
 
-while (playAgain == 'y') {
-    game();
-    playAgain = prompt('Do you want to play again? [y/n]');
+// while (playAgain == 'y') {
+//     game();
+//     playAgain = prompt('Do you want to play again? [y/n]');
+// }
+
+
+
+const btnRock = document.createElement('button');
+const btnPaper = document.createElement('button');
+const btnScissors = document.createElement('button');
+
+btnRock.classList.add("button", "rock");
+btnPaper.classList.add("button", "paper");
+btnScissors.classList.add("button", "scissors");
+
+
+// buttons need to be appended in order for querySelectorAll to work
+document.body.appendChild(btnRock);
+document.body.appendChild(btnPaper);
+document.body.appendChild(btnScissors);
+
+
+const buttons = document.querySelectorAll(".button")
+buttons.forEach(button => button.addEventListener("click", playerPlay));
+
+function playerPlay() {
+    console.log(this)
 }
 
-console.log("Thank you for playing rock, paper and scissors!")
+
+
+
 
