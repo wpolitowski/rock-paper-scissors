@@ -1,10 +1,15 @@
+
+
+.result {
+    height: 50px;
+}
+
 .button {
     width: 150px;
     height: 150px;
     border: none;
     background: rgba(0,0,0,0);
 }
-
 
 .rock {
     background-image: url("../images/rock.png");

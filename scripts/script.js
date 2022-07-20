@@ -3,24 +3,6 @@ function computerPlay() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
-// function playerPlay() {
-//     let move = prompt('Choose your weapon - rock, paper or scissors');
-    
-//     if (move == null) {
-//         return null;
-//     }
-
-//     while (move != 'rock' && move != 'paper' && move != 'scissors') {
-//         alert('Wrong weapon! Try again');
-//         move = prompt('Choose your weapon - rock, paper or scissors');
-//         if (move != null) move = move.toLowerCase();
-//         else return null;
-//     }
-//     return move;
-// }
-
-
-
 function playRound(playerSelection, computerSelection) {
     let winner, description;
 
@@ -66,7 +48,7 @@ function playRound(playerSelection, computerSelection) {
         }
     }
 
-    console.log(description);
+    descriptionDiv.textContent = description;
     return winner;
 }
 
@@ -91,14 +73,38 @@ function game() {
     else console.log ("It's draw. Could have been worse 🤷")
 }
 
-let playAgain = 'y';
+function playerPlay() {
+    let playerMove = this.classList[1]; 
+    let roundWinner = playRound(playerMove, computerPlay());
+    if (roundWinner === 'player') playerScore++;
+    else if (roundWinner === 'computer') computerScore++;
+    displayScore();
+}
+
+function displayScore() {
+    resultDiv.textContent = `Your score: ${playerScore}     Computer score: ${computerScore}`;
+}
+// let playAgain = 'y';
 
 // while (playAgain == 'y') {
 //     game();
 //     playAgain = prompt('Do you want to play again? [y/n]');
 // }
 
+let playerScore = 0,
+    computerScore = 0;
 
+    
+//DOM Manipulation//  
+
+const h1 = document.createElement('h1');
+h1.classList.add('heading');
+h1.textContent = 'Rock Paper Scissors';
+document.body.appendChild(h1);
+
+const descriptionDiv = document.createElement('div');
+descriptionDiv.classList.add("result");
+document.body.appendChild(descriptionDiv);
 
 
 const btnRock = document.createElement('button');
@@ -108,19 +114,19 @@ const btnScissors = document.createElement('button');
 btnRock.classList.add("button", "rock");
 btnPaper.classList.add("button", "paper");
 btnScissors.classList.add("button", "scissors");
-
-
-// buttons need to be appended in order for querySelectorAll to work
+// buttons need to be appended first in order for querySelectorAll to work
 document.body.appendChild(btnRock);
 document.body.appendChild(btnPaper);
 document.body.appendChild(btnScissors);
 
 
+const resultDiv = document.createElement('div');
+resultDiv.classList.add("result");
+document.body.appendChild(resultDiv);
+
+
+
+//ROUND START
 const buttons = document.querySelectorAll(".button")
 buttons.forEach(button => button.addEventListener("click", playerPlay));
-
-function playerPlay() {
-    let playerMove = this.classList[1]; 
-    playRound(playerMove, computerPlay());
-}
 
