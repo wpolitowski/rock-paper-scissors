@@ -83,6 +83,14 @@ function playerPlay() {
 
 function displayScore() {
     resultDiv.textContent = `Your score: ${playerScore}     Computer score: ${computerScore}`;
+    if (playerScore === 3) {
+        resultDiv.textContent = 'You won the game! Congratulations!';
+        playerScore = computerScore = 0;
+    } else if (computerScore === 3) {
+        resultDiv.textContent = 'You lost! Better luck next time!';
+        playerScore = computerScore = 0;
+    }
+
 }
 // let playAgain = 'y';
 
@@ -126,7 +134,7 @@ document.body.appendChild(resultDiv);
 
 
 
-//ROUND START
+//ROUND/GAME START 
 const buttons = document.querySelectorAll(".button")
 buttons.forEach(button => button.addEventListener("click", playerPlay));
 
