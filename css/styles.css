@@ -1,12 +1,35 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #eee;
+}
 
+.containerSelection {
+    height: 300px;
+    display: flex;
+}
+
+.playerSelection, 
+.computerSelection, 
+.resultSign {
+    height: 200px;
+    width: 200px;
+}
+
+.containerButtons { 
+    display: flex;
+    justify-content: space-evenly;
+    gap: 150px;
+}
 
 .result {
     height: 50px;
 }
 
-.button {
-    width: 150px;
-    height: 150px;
+.button, .buttonComp {
+    width: 100px;
+    height: 100px;
     border: none;
     background: rgba(0,0,0,0);
 }
@@ -23,7 +46,23 @@
     background-image: url("../images/scissors.png");
 }
 
-.rock, .paper, .scissors {
+.equals {
+    background-image: url("../images/equals.png");
+}
+
+.greater {
+    background-image: url("../images/greater.png");
+}
+
+.less {
+    background-image: url("../images/less.png");
+}
+
+.flipped {
+    transform: scaleX(-1);
+}
+
+.rock, .paper, .scissors, .greater, .less, .equals {
     background-repeat: no-repeat;
     background-size: contain;
 }
