@@ -4,7 +4,7 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    let winner, description;
+    let winner;
 
     //displaying selected weapon
 
@@ -50,7 +50,7 @@ function playRound(playerSelection, computerSelection) {
     if (winner == 'player') {
         comparisonSign.classList.add('greater');
     } else if (winner == 'computer') {
-        comparisonSign.classList.add('less');
+        comparisonSign.classList.add('greater', 'flipped');
     } else {
         comparisonSign.classList.add('equals');
     }
@@ -58,53 +58,33 @@ function playRound(playerSelection, computerSelection) {
     return winner;
 }
 
-// function game() {
-//     let playerScore = 0, computerScore = 0;
-//     for (let i = 0; i < 1; i++) {
-//         const playerSelection = playerPlay();
-//         const computerSelection = computerPlay();
-//         let winner = playRound(playerSelection, computerSelection);
-//         if (winner == 'player') playerScore++;
-//         else if (winner == 'computer') computerScore++;
-//         else if (winner == 'aborted') {
-//             return;
-//         }
-        
-//         console.log(`Current score: Player -> %c${playerScore} - ${computerScore} %c<- Computer 
-//         `, "font-weight: bold; color: red;", "");
-//     }
-
-//     if (playerScore > computerScore) console.log("You win! Congrats! 🥳");
-//     else if (playerScore < computerScore) console.log("Unfortunately, computers wins 😓");
-//     else console.log ("It's draw. Could have been worse 🤷")
-// }
-
 function playerPlay() {
     let playerMove = this.classList[1]; 
     let roundWinner = playRound(playerMove, computerPlay());
     if (roundWinner === 'player') playerScore++;
     else if (roundWinner === 'computer') computerScore++;
     displayScore();
+
+    if (playerScore === 3 || computerScore === 3) 
+        finishGame();        
 }
 
 function displayScore() {
     descriptionDiv.textContent = '';
     resultDiv.textContent = `Your score: ${playerScore}     Computer score: ${computerScore}`;
+}
+
+function finishGame() {
     if (playerScore === 3) {
         descriptionDiv.textContent = 'You won the game! Congratulations!';
-        playerScore = computerScore = 0;
     } else if (computerScore === 3) {
         descriptionDiv.textContent = 'You lost! Better luck next time!';
-        playerScore = computerScore = 0;
     }
-
+    playerScore = computerScore = 0;
+    buttons.forEach(button => button.removeEventListener('click',playerPlay));
+    playAgainBtn.style.visibility = 'visible';
 }
-// let playAgain = 'y';
 
-// while (playAgain == 'y') {
-//     game();
-//     playAgain = prompt('Do you want to play again? [y/n]');
-// }
 
 let playerScore = 0,
     computerScore = 0;
@@ -122,7 +102,7 @@ const containerBtns = document.querySelector('.containerButtons');
 const descriptionDiv = document.createElement('div');
 descriptionDiv.classList.add("result");
 document.body.insertBefore(descriptionDiv, containerSel); // this method inserts
-//a node before a child (container) of the node (body)
+//a node before a child (containerSel) of the node (body)
 
 const playerButtons = document.querySelector(".containerButtons > .playerButtons");
 const computerButtons = document.querySelector(".containerButtons > .computerButtons");
@@ -154,8 +134,28 @@ resultDiv.classList.add("result");
 document.body.appendChild(resultDiv);
 
 
-
 //ROUND/GAME START 
 const buttons = document.querySelectorAll(".button");
 buttons.forEach(button => button.addEventListener("click", playerPlay));
 
+//RESET GAME
+function resetGame() {
+    const comparisonSign = document.querySelector('.resultSign');
+    const playerDisplay = document.querySelector(".playerSelection");
+    const computerDisplay = document.querySelector(".computerSelection");
+    comparisonSign.classList.value = 'resultSign';
+    playerDisplay.classList.value = 'playerSelection';
+    computerDisplay.classList.value = 'computerSelection';
+    resultDiv.textContent = '';
+    descriptionDiv.textContent = '';
+    buttons.forEach(button => button.addEventListener('click', playerPlay));
+    playAgainBtn.style.visibility = 'hidden';
+}
+
+//create button for restarting the game
+const playAgainBtn = document.createElement('button');
+playAgainBtn.classList.add('restartButton');
+playAgainBtn.textContent = 'Play again?';
+playAgainBtn.style.visibility = 'hidden';
+playAgainBtn.addEventListener('click', resetGame);
+document.body.insertBefore(playAgainBtn, containerBtns);

@@ -54,10 +54,6 @@ body {
     background-image: url("../images/greater.png");
 }
 
-.less {
-    background-image: url("../images/less.png");
-}
-
 .flipped {
     transform: scaleX(-1);
 }
