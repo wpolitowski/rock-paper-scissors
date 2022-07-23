@@ -19,6 +19,9 @@ h1 {
     text-transform: uppercase;
     font-weight: 700;
     font-style: italic;
+    text-shadow: -8px -6px #ffde55, -14px -12px #ef5480, 8px 6px #74dae2;
+
+    /* 74dae2 */
 }
 
 .containerSelection {

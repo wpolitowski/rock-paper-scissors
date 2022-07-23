@@ -103,6 +103,7 @@ const containerSel = document.querySelector('.containerSelection');
 const containerBtns = document.querySelector('.containerButtons');
 const descriptionDiv = document.createElement('div');
 descriptionDiv.classList.add("result");
+descriptionDiv.textContent = 'Choose your weapon';
 document.body.insertBefore(descriptionDiv, containerSel); // this method inserts
 //a node before a child (containerSel) of the node (body)
 
@@ -137,6 +138,8 @@ computerButtons.appendChild(btnRockComp);
 
 const playerScoreDisplay = document.querySelector('.playerScore');
 const computerScoreDisplay = document.querySelector('.computerScore');
+playerScoreDisplay.textContent = 'Player: 0';
+computerScoreDisplay.textContent = 'Computer: 0';
 
 
 
@@ -152,9 +155,9 @@ function resetGame() {
     comparisonSign.classList.value = 'resultSign';
     playerDisplay.classList.value = 'playerSelection';
     computerDisplay.classList.value = 'computerSelection';
-    playerScoreDisplay.textContent = '';
-    computerScoreDisplay.textContent = '';
-    descriptionDiv.textContent = '';
+    playerScoreDisplay.textContent = 'Player: 0';
+    computerScoreDisplay.textContent = 'Computer: 0';
+    descriptionDiv.textContent = 'Choose your weapon';
     buttons.forEach(button => button.addEventListener('click', playerPlay));
     playAgainBtn.style.visibility = 'hidden';
 }
