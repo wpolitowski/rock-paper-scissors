@@ -71,7 +71,9 @@ function playerPlay() {
 
 function displayScore() {
     descriptionDiv.textContent = '';
-    resultDiv.textContent = `Your score: ${playerScore}     Computer score: ${computerScore}`;
+    playerScoreDisplay.textContent = `Player: ${playerScore}`;
+    computerScoreDisplay.textContent = `Computer: ${computerScore}`;
+    // resultDiv.textContent = `Your score: ${playerScore}     Computer score: ${computerScore}`;
 }
 
 function finishGame() {
@@ -104,8 +106,8 @@ descriptionDiv.classList.add("result");
 document.body.insertBefore(descriptionDiv, containerSel); // this method inserts
 //a node before a child (containerSel) of the node (body)
 
-const playerButtons = document.querySelector(".containerButtons > .playerButtons");
-const computerButtons = document.querySelector(".containerButtons > .computerButtons");
+const playerButtons = document.querySelector(".playerButtons");
+const computerButtons = document.querySelector(".computerButtons");
 
 
 const btnRock = document.createElement('button');
@@ -129,9 +131,13 @@ computerButtons.appendChild(btnScissorsComp);
 computerButtons.appendChild(btnPaperComp)
 computerButtons.appendChild(btnRockComp);
 
-const resultDiv = document.createElement('div');
-resultDiv.classList.add("result");
-document.body.appendChild(resultDiv);
+// const resultDiv = document.createElement('div');
+// resultDiv.classList.add("result");
+// document.body.appendChild(resultDiv);
+
+const playerScoreDisplay = document.querySelector('.playerScore');
+const computerScoreDisplay = document.querySelector('.computerScore');
+
 
 
 //ROUND/GAME START 
@@ -146,7 +152,8 @@ function resetGame() {
     comparisonSign.classList.value = 'resultSign';
     playerDisplay.classList.value = 'playerSelection';
     computerDisplay.classList.value = 'computerSelection';
-    resultDiv.textContent = '';
+    playerScoreDisplay.textContent = '';
+    computerScoreDisplay.textContent = '';
     descriptionDiv.textContent = '';
     buttons.forEach(button => button.addEventListener('click', playerPlay));
     playAgainBtn.style.visibility = 'hidden';
@@ -158,4 +165,4 @@ playAgainBtn.classList.add('restartButton');
 playAgainBtn.textContent = 'Play again?';
 playAgainBtn.style.visibility = 'hidden';
 playAgainBtn.addEventListener('click', resetGame);
-document.body.insertBefore(playAgainBtn, containerBtns);
+document.body.insertBefore(playAgainBtn, containerSel);

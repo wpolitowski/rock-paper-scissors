@@ -1,13 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+
+html {
+    background: rgb(238,238,238);
+    background: linear-gradient(267deg, rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%);
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #eee;
+    justify-content: space-between;
+    /* background-color: #eee; */
+    height: 100%;
+    font-family: 'Josefin Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;    
+}
+
+h1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-style: italic;
 }
 
 .containerSelection {
     height: 300px;
     display: flex;
+    align-items: center;
 }
 
 .playerSelection, 
@@ -25,6 +42,7 @@ body {
 
 .result {
     height: 50px;
+    margin-top: 50px;
 }
 
 .button, .buttonComp {
@@ -61,4 +79,23 @@ body {
 .rock, .paper, .scissors, .greater, .less, .equals {
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+.playerContainer, .computerContainer {
+    text-align: center;
+}
+
+.computerScore, .playerScore {
+    margin-top: 10px;
+}
+
+.restartButton {
+    padding: 10px;
+    font-weight: 700;
+    box-shadow: 2px 2px 10px gray;
+    margin: 10px;
+}
+
+.result {
+    font-size: 18px;
 }
